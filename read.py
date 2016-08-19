@@ -5,12 +5,12 @@ class Func(object):
     params = 0
     returns = ""
 
-    # The class "constructor" - It's actually an initializer 
     def __init__(self,name, params, returns):
         self.name = name
         self.params = params
         self.returns = returns
 
+# Given a go file pathname, opens the file and creates the func objects from the functions in the file
 def findFuncs(pathname):
 	lines = [line.rstrip('\n') for line in open(pathname)]
 	allFuncs = []
@@ -38,8 +38,7 @@ def findFuncs(pathname):
 
 	return allFuncs;
 
-params = findFuncs('./api/caravan.go')
-
+# Builds the comments to insert into the file
 def buildComments():
 	for p in params:
 		comment = "//---------------------------\n// func: "+ p.name + "\n// params:\n"
@@ -58,4 +57,7 @@ def buildComments():
 		comment += "//---------------------------"
 		print comment
 
+# Generate comments
+var = raw_input("pathname: ")
+params = findFuncs(var)
 buildComments()
